@@ -257,6 +257,17 @@
             color: var(--cream);
         }
 
+        .detail-value a {
+            color: var(--gold-light);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(240, 208, 144, 0.4);
+            transition: border-color 0.2s ease;
+        }
+
+        .detail-value a:hover {
+            border-color: var(--gold-light);
+        }
+
         .closing {
             animation: fadeInUp 1s ease-out 1.9s both;
             margin-top: 2.5rem;
@@ -368,7 +379,7 @@
             <div class="scotland-icon">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div>
 
             <div class="edinburgh-image">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Skyline_of_Edinburgh.jpg/2560px-Skyline_of_Edinburgh.jpg" alt="Edinburgh Skyline">
+                <img src="https://www.edinburghfestivalcity.com/assets/000/000/121/06_Street_Party_04_Chris_Watt_CAP_gallery_detail_banner.jpg?1727779581" alt="Edinburgh Hogmanay Street Party">
             </div>
 
             <div class="event">
@@ -381,7 +392,7 @@
                     <span class="detail-icon">🎉</span>
                     <div class="detail-content">
                         <p class="detail-label">Experience</p>
-                        <p class="detail-value">Edinburgh Street Party</p>
+                        <p class="detail-value"><a href="https://www.edinburghfestivalcity.com/festivals/edinburghs-hogmanay" target="_blank">Edinburgh Street Party</a></p>
                     </div>
                 </div>
 
@@ -389,7 +400,7 @@
                     <span class="detail-icon">🏡</span>
                     <div class="detail-content">
                         <p class="detail-label">Staying at</p>
-                        <p class="detail-value">Garden Rooms Edinburgh</p>
+                        <p class="detail-value"><a href="https://gardenrooms-edinburgh.com/" target="_blank">Garden Rooms Edinburgh</a></p>
                     </div>
                 </div>
 
@@ -426,7 +437,7 @@
 
         // Generate firework particles
         const fireworksContainer = document.getElementById('fireworks');
-        const colors = ['#d4a853', '#f0d090', '#ffffff', '#ffb7c5'];
+        const colors = ['#d4a853', '#f0d090', '#ffffff', '#ffb7c5', '#ff6b6b', '#4ecdc4', '#ffe66d', '#ff8c42', '#a855f7', '#38bdf8'];
         
         function createFirework() {
             const firework = document.createElement('div');
@@ -449,6 +460,113 @@
         // Initial burst
         for (let i = 0; i < 5; i++) {
             setTimeout(createFirework, i * 100);
+        }
+
+        // CLICK FIREWORKS - Explosive burst on click
+        document.addEventListener('click', function(e) {
+            createExplosion(e.clientX, e.clientY);
+        });
+
+        function createExplosion(x, y) {
+            const particleCount = 50;
+            const explosionColors = ['#d4a853', '#f0d090', '#ffffff', '#ffb7c5', '#ff6b6b', '#ffe66d', '#ff8c42', '#a855f7', '#38bdf8', '#4ecdc4', '#f472b6', '#fbbf24'];
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'explosion-particle';
+                
+                const angle = (i / particleCount) * 360;
+                const velocity = 80 + Math.random() * 120;
+                const size = 4 + Math.random() * 6;
+                const color = explosionColors[Math.floor(Math.random() * explosionColors.length)];
+                
+                particle.style.cssText = `
+                    position: fixed;
+                    left: ${x}px;
+                    top: ${y}px;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: ${color};
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    box-shadow: 0 0 ${size * 2}px ${color}, 0 0 ${size * 4}px ${color};
+                `;
+                
+                document.body.appendChild(particle);
+                
+                const radian = angle * (Math.PI / 180);
+                const destX = Math.cos(radian) * velocity;
+                const destY = Math.sin(radian) * velocity;
+                
+                particle.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                    { transform: `translate(${destX}px, ${destY + 50}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: 800 + Math.random() * 400,
+                    easing: 'cubic-bezier(0, 0.5, 0.5, 1)'
+                }).onfinish = () => particle.remove();
+            }
+
+            // Add sparkle trails
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    const angle = Math.random() * 360;
+                    const distance = Math.random() * 60;
+                    const radian = angle * (Math.PI / 180);
+                    const sparkleX = x + Math.cos(radian) * distance;
+                    const sparkleY = y + Math.sin(radian) * distance;
+                    const color = explosionColors[Math.floor(Math.random() * explosionColors.length)];
+                    
+                    sparkle.style.cssText = `
+                        position: fixed;
+                        left: ${sparkleX}px;
+                        top: ${sparkleY}px;
+                        width: 3px;
+                        height: 3px;
+                        background: ${color};
+                        border-radius: 50%;
+                        pointer-events: none;
+                        z-index: 9999;
+                        box-shadow: 0 0 10px ${color};
+                    `;
+                    
+                    document.body.appendChild(sparkle);
+                    
+                    sparkle.animate([
+                        { transform: 'translateY(0) scale(1)', opacity: 1 },
+                        { transform: 'translateY(80px) scale(0)', opacity: 0 }
+                    ], {
+                        duration: 600 + Math.random() * 300,
+                        easing: 'ease-out'
+                    }).onfinish = () => sparkle.remove();
+                }, i * 20);
+            }
+
+            // Add ring burst
+            const ring = document.createElement('div');
+            ring.style.cssText = `
+                position: fixed;
+                left: ${x}px;
+                top: ${y}px;
+                width: 10px;
+                height: 10px;
+                border: 3px solid var(--gold);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9998;
+                transform: translate(-50%, -50%);
+            `;
+            document.body.appendChild(ring);
+            
+            ring.animate([
+                { width: '10px', height: '10px', opacity: 1, borderWidth: '3px' },
+                { width: '200px', height: '200px', opacity: 0, borderWidth: '1px' }
+            ], {
+                duration: 500,
+                easing: 'ease-out'
+            }).onfinish = () => ring.remove();
         }
     </script>
 </body>

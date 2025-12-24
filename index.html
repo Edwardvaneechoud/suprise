@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise ✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --midnight: #0a1628;
+            --deep-blue: #162544;
+            --gold: #d4a853;
+            --gold-light: #f0d090;
+            --cream: #faf6f0;
+            --soft-white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(180deg, var(--midnight) 0%, var(--deep-blue) 50%, #1a3a5c 100%);
+            min-height: 100vh;
+            color: var(--cream);
+            position: relative;
+        }
+
+        /* Stars background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--cream);
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Firework particles */
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: explode 2.5s infinite ease-out;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0); opacity: 1; }
+            50% { opacity: 1; }
+            100% { transform: scale(1) translateY(-100px); opacity: 0; }
+        }
+
+        /* Main content */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .card {
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .intro {
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .intro-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--gold-light);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .recipient {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--soft-white);
+            margin-bottom: 2rem;
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .occasion {
+            animation: fadeInUp 1s ease-out 0.7s both;
+            margin-bottom: 2.5rem;
+        }
+
+        .occasion-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .occasion-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--cream);
+        }
+
+        .gift-reveal {
+            animation: fadeInUp 1s ease-out 1s both;
+            margin-bottom: 2rem;
+        }
+
+        .destination {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--soft-white);
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 40px rgba(212, 168, 83, 0.3);
+        }
+
+        .country {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .scotland-icon {
+            font-size: 2.5rem;
+            margin: 1.5rem 0;
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        .edinburgh-image {
+            animation: fadeInUp 1s ease-out 1.3s both;
+            margin: 1.5rem 0 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(212, 168, 83, 0.2);
+        }
+
+        .edinburgh-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .event {
+            animation: fadeInUp 1s ease-out 1.5s both;
+            background: linear-gradient(135deg, rgba(212, 168, 83, 0.15), rgba(212, 168, 83, 0.05));
+            border: 1px solid rgba(212, 168, 83, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .event-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .event-subtitle {
+            font-size: 1rem;
+            color: var(--cream);
+            opacity: 0.9;
+        }
+
+        .details {
+            animation: fadeInUp 1s ease-out 1.7s both;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(212, 168, 83, 0.2);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-icon {
+            font-size: 1.3rem;
+        }
+
+        .detail-content {
+            text-align: left;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            margin-bottom: 0.15rem;
+        }
+
+        .detail-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--cream);
+        }
+
+        .closing {
+            animation: fadeInUp 1s ease-out 1.9s both;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 168, 83, 0.2);
+        }
+
+        .closing-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--gold-light);
+            margin-bottom: 1rem;
+        }
+
+        .hearts {
+            font-size: 1.5rem;
+            letter-spacing: 0.3em;
+        }
+
+        .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--cream);
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Subtle glow effect */
+        .glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 168, 83, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-1 {
+            top: 10%;
+            right: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .glow-2 {
+            bottom: 20%;
+            left: -100px;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 380px) {
+            .destination {
+                font-size: 2.5rem;
+            }
+            .country {
+                font-size: 1.5rem;
+            }
+            .recipient {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background effects -->
+    <div class="stars" id="stars"></div>
+    <div class="fireworks" id="fireworks"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <!-- Main content -->
+    <div class="container">
+        <div class="card">
+            <div class="intro">
+                <p class="intro-text">A very special gift for</p>
+                <h1 class="recipient">Courtney ♡</h1>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="occasion">
+                <p class="occasion-label">Celebrating</p>
+                <p class="occasion-text">Your 30th Birthday & Christmas</p>
+            </div>
+
+            <div class="gift-reveal">
+                <h2 class="destination">Edinburgh</h2>
+                <p class="country">Scotland</p>
+            </div>
+
+            <div class="scotland-icon">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div>
+
+            <div class="edinburgh-image">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Skyline_of_Edinburgh.jpg/2560px-Skyline_of_Edinburgh.jpg" alt="Edinburgh Skyline">
+            </div>
+
+            <div class="event">
+                <p class="event-title">Hogmanay 2025</p>
+                <p class="event-subtitle">Ringing in the New Year together</p>
+            </div>
+
+            <div class="details">
+                <div class="detail-item">
+                    <span class="detail-icon">🎉</span>
+                    <div class="detail-content">
+                        <p class="detail-label">Experience</p>
+                        <p class="detail-value">Edinburgh Street Party</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-icon">🏡</span>
+                    <div class="detail-content">
+                        <p class="detail-label">Staying at</p>
+                        <p class="detail-value">Garden Rooms Edinburgh</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-icon">📅</span>
+                    <div class="detail-content">
+                        <p class="detail-label">When</p>
+                        <p class="detail-value">29th Dec – 1st Jan</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="closing">
+                <p class="closing-text">Here's to an unforgettable adventure together</p>
+                <p class="hearts">♥ ♥ ♥</p>
+                <p class="signature">All my love, Edward x</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.width = (Math.random() * 2 + 1) + 'px';
+            star.style.height = star.style.width;
+            starsContainer.appendChild(star);
+        }
+
+        // Generate firework particles
+        const fireworksContainer = document.getElementById('fireworks');
+        const colors = ['#d4a853', '#f0d090', '#ffffff', '#ffb7c5'];
+        
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = Math.random() * 100 + '%';
+            firework.style.top = (Math.random() * 30 + 20) + '%';
+            firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            firework.style.animationDuration = (Math.random() * 1.5 + 2) + 's';
+            firework.style.boxShadow = `0 0 6px ${firework.style.backgroundColor}`;
+            fireworksContainer.appendChild(firework);
+
+            setTimeout(() => {
+                firework.remove();
+            }, 3000);
+        }
+
+        // Create fireworks periodically
+        setInterval(createFirework, 400);
+        
+        // Initial burst
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createFirework, i * 100);
+        }
+    </script>
+</body>
+</html>
